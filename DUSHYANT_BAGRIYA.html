@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUSHYANT BAGRIYA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: bold
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #emptyinput {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+      text-align: center;
+    }
+
+    #spanresult {
+      font-weight: bold;
+    }
+
+    #result {
+      color: #4CAF50;
+      font-size: 1.2em;
+    }
+
+    #resultinterest {
+      color: #ad3030;
+      font-size: 1.2em;
+    }
+
+    #dush{
+      font-weight: bolder;
+      color: red;
+    }
+
+
+    #dushy{
+      font-family: cursive;
+      margin-top: 15px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+   <center> <h5 id="dushy">This webpage is created by <br><span id="dush"> DUSHYANT BAGRIYA </span> </center>
+    <h2>Interest Calculator</h2>
+    <div>
+      <label for="amount">Principal Amount:</label>
+      <input type="number" id="amount" placeholder="KITNE RS. DIYE ( सूद )">
+    </div>
+
+
+<div>
+    <div>
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" onchange="findDays()">
+    </div>
+    <div>
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" onchange="findDays()">
+    </div>
+
+</div>
+
+    <div class="btn-container">
+      <span id="emptyinput"></span>
+      <br>
+      <label>Interest/Byaj :- </label><br>
+      <button onclick="calculate(12)">1.00</button>
+      <button onclick="calculate(15)">1.25</button>
+      <button onclick="calculate(18)">1.5 </button>
+      <button onclick="calculate(21)">1.75</button>
+      <button onclick="calculate(24)">2.00</button>
+      <button onclick="calculate(document.getElementById('custom_interest').value  * 12)" style="height: 35px; width: 200px;background-color: #ad3030;"> <input type="number" id="custom_interest" placeholder="Rs/100" style="width: 50%;float: left; margin-top: -9px;margin-left: -19px;">Click Here</button>
+      <button onclick="calculate(document.getElementById('custominterest').value)" style="height: 35px; width: 200px;background-color: #ad3030;"> <input type="number" id="custominterest" placeholder="Enter % " style="width: 50%;float: left; margin-top: -9px;margin-left: -19px;">Click Here</button>
+
+    </div>
+
+    <span id="spanresult">Total Amount (With Interest):- <span id="result"></span></span><br><br>
+    <span id="spanresult">Total Interest ( ब्याज ):- <span id="resultinterest"> </span></span><br><br>
+    <span id="spanresult">Total Days ( दिन ) :- <span id="resultdays" style="color: blue;"> </span></span>
+
+
+  </div>
+
+  <script>
+
+var daysDiff; 
+
+function findDays() {
+  var startDate = new Date(document.getElementById("startDate").value);
+  var endDate = new Date(document.getElementById("endDate").value);
+
+
+  if (startDate && endDate && startDate <= endDate) {
+    var timeDiff = endDate.getTime() - startDate.getTime();
+     daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+    resultDiv.innerHTML = "";
+  } 
+}
+
+
+
+        function calculate(interestRate) {
+      var amount = parseFloat(document.getElementById("amount").value);
+
+
+      if (isNaN(amount) || isNaN(daysDiff) || amount <= 0 || daysDiff <= 0) {
+        document.getElementById("emptyinput").innerHTML = "*Pahle amount and interest DONO fill kro !";
+        return;
+      } else {
+        document.getElementById("emptyinput").innerHTML = "";
+      }
+
+      var monthlyInterest = (amount * daysDiff * interestRate) / 36500;
+      var totalAmount = amount + monthlyInterest;
+
+      document.getElementById("result").innerHTML = totalAmount;
+      document.getElementById("resultinterest").innerHTML = monthlyInterest;
+      document.getElementById("resultdays").innerHTML = daysDiff;
+
+    }
+
+  </script>
+</body>
+</html>
